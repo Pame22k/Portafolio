@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { @apply bg-white text-navy antialiased; }
+::selection { background: #1F6BFF; color: white; }
+
+.bg-grid {
+  background-image: radial-gradient(rgba(142, 201, 255, 0.25) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.bg-grid-light {
+  background-image: radial-gradient(rgba(10, 27, 69, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.focus-ring { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric focus-visible:ring-offset-2; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
