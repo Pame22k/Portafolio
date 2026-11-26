@@ -1,9 +1,9 @@
-import { BarChart3, BrainCircuit, Code2, Globe, Wrench, Sparkles } from "lucide-react";
+import { BarChart3, BrainCircuit, Code2, Globe, Wrench, Sparkles, type LucideIcon } from "lucide-react";
 import { skills } from "@/data/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
-const icons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = { code: Code2, globe: Globe, chart: BarChart3, brain: BrainCircuit, wrench: Wrench };
+const icons: Record<string, LucideIcon> = { code: Code2, globe: Globe, chart: BarChart3, brain: BrainCircuit, wrench: Wrench };
 
 export default function Skills() {
   return (
