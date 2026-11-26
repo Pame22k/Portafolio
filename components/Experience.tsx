@@ -1,47 +1,40 @@
-import Link from "next/link";
-import { ArrowUpRight, BookOpen, Compass, Gamepad2, Heart, Recycle, Smartphone, Trophy } from "lucide-react";
-import { experience, type ExperienceItem } from "@/data/content";
+import { BarChart3, BrainCircuit, Code2, Globe, Wrench, Sparkles, type LucideIcon } from "lucide-react";
+import { skills } from "@/data/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
-const icons: Record<ExperienceItem["icon"], React.ComponentType<{ size?: number; className?: string }>> = {
-  trophy: Trophy, heart: Heart, book: BookOpen, recycle: Recycle, gamepad: Gamepad2, smartphone: Smartphone, compass: Compass,
-};
+const icons: Record<string, LucideIcon> = { code: Code2, globe: Globe, chart: BarChart3, brain: BrainCircuit, wrench: Wrench };
 
-function Card({ it }: { it: ExperienceItem }) {
-  const Icon = icons[it.icon];
-  const inner = (
-    <article className="h-full rounded-2xl border border-navy/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-soft">
-      <div className="flex items-center justify-between">
-        <span className="grid h-10 w-10 place-items-center rounded-xl bg-navy text-sky"><Icon size={20} /></span>
-        <span className="text-xs font-semibold uppercase tracking-wider text-electric">{it.tag}</span>
-      </div>
-      <h4 className="mt-4 flex items-center justify-between gap-2 font-display text-lg font-semibold">{it.title}{it.href && <ArrowUpRight size={18} className="shrink-0 text-electric" />}</h4>
-      <p className="mt-2 text-sm leading-relaxed text-navy/70">{it.text}</p>
-    </article>
-  );
-  return it.href ? <Link href={it.href} className="focus-ring block h-full rounded-2xl">{inner}</Link> : inner;
-}
-
-export default function Experience() {
+export default function Skills() {
   return (
-    <section id="experiencia" className="bg-mist py-24">
+    <section id="habilidades" className="bg-white py-24">
       <div className="mx-auto max-w-6xl px-5">
-        <SectionHeading number="02" eyebrow="Experiencia" title="Logros, voluntariado y proyectos" intro="Mi experiencia viene de las competencias, el voluntariado, las tutorías y los proyectos de innovación en los que he participado." />
-        <div className="space-y-14">
-          {experience.map((g) => (
-            <div key={g.group}>
-              <Reveal>
-                <h3 className="font-display text-xl font-semibold">{g.group}</h3>
-                <p className="mt-1 text-navy/60">{g.intro}</p>
+        <SectionHeading number="04" eyebrow="Habilidades" title="Lo que sé hacer y con qué herramientas" intro="Las herramientas técnicas listadas son las que he usado en mis proyectos y actividades. No muestro porcentajes de dominio." />
+
+        <Reveal>
+          <h3 className="flex items-center gap-2 font-display text-lg font-semibold"><Sparkles size={18} className="text-electric" /> Habilidades personales</h3>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {skills.personal.map((s) => (<span key={s} className="rounded-full border border-navy/15 px-4 py-2 text-sm font-medium transition hover:border-electric hover:bg-sky-100">{s}</span>))}
+          </div>
+        </Reveal>
+
+        <h3 className="mt-14 font-display text-lg font-semibold">Herramientas y formación tecnológica</h3>
+        <div className="mt-5 grid gap-5 md:grid-cols-2">
+          {skills.technical.map((c, i) => {
+            const Icon = icons[c.icon];
+            return (
+              <Reveal key={c.title} delay={i * 0.06}>
+                <div className="h-full rounded-2xl border border-navy/10 bg-mist p-6">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-navy text-sky"><Icon size={20} /></span>
+                  <h4 className="mt-4 font-display font-semibold">{c.title}</h4>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-electric">Usado en mis proyectos</p>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {c.used.map((u) => (<span key={u} className="rounded-md bg-white px-2.5 py-1 text-sm shadow-sm">{u}</span>))}
+                  </div>
+                </div>
               </Reveal>
-              <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {g.items.map((it, i) => (
-                  <Reveal key={it.title} delay={i * 0.06}><Card it={it} /></Reveal>
-                ))}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
